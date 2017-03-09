@@ -1,0 +1,78 @@
+<span class="error" ng-show="$ctrl.isError">{{$ctrl.errorMessage}}</span>
+<div ng-show="!$ctrl.isError">
+    <div style="width:100%;">
+        <div class="left">
+            <h2 ng-if="$ctrl.editing">Редактирование книги: {{$ctrl.book.name}}</h2>
+            <h2 ng-if="!$ctrl.editing">Добавление книги</h2>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr>
+    <div>
+        <form name="bookEdit">
+            <table class="edit-form">
+                <tbody>
+                    <tr>
+                        <td>Название: <sup class="require">*</sup></td>
+                        <td>
+                            <input name="name" type="text" ng-model="$ctrl.book.name" ng-required="{{!$ctrl.editing || undefined}}" maxlength="150">
+                            <div ng-show="bookEdit.name.$touched && bookEdit.name.$invalid">
+                                <span class="error" ng-show="bookEdit.name.$error.required">Обязательное!</span><br>
+                                <span class="error" ng-show="bookEdit.name.$error.maxlength">Длина не больше 150!</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Автор: <sup class="require">*</sup></td>
+                        <td>
+                            <input name="author" type="text" ng-model="$ctrl.book.author" ng-required="{{!$ctrl.editing || undefined}}" maxlength="100">
+                            <div ng-show="bookEdit.author.$touched && bookEdit.author.$invalid">
+                                <span class="error" ng-show="bookEdit.author.$error.required">Обязательное!</span><br>
+                                <span class="error" ng-show="bookEdit.author.$error.maxlength">Длина не больше 100!</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Год издания:</td>
+                        <td>
+                            <input name="year" type="text" ng-model="$ctrl.book.year" pattern="\d+">
+                            <div ng-show="bookEdit.year.$touched && bookEdit.year.$invalid">
+                                <span class="error" ng-show="bookEdit.year.$error.pattern">Необходимо ввести число!</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Описание: <sup class="require">*</sup></td>
+                        <td>
+                            <textarea name="description" type="text" ng-model="$ctrl.book.description" ng-required="{{!$ctrl.editing || undefined}}" maxlength="2000"></textarea>
+                            <div ng-show="bookEdit.description.$touched && bookEdit.description.$invalid">
+                                <span class="error" ng-show="bookEdit.description.$error.required">Обязательное!</span><br>
+                                <span class="error" ng-show="bookEdit.description.$error.maxlength">Длина не больше 2000!</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Обложка: <sup class="require">*</sup></td>
+                        <td>
+                            <img class="image-edit left" ng-if="$ctrl.editing" ng-src="{{$ctrl.book.image}}" alt="">
+                            <input name="image" class="left" type="file" ng-model="$ctrl.fileName" ng-required="{{!$ctrl.editing || undefined}}" file-model="$ctrl.file" max-size="500" valid-extensions="jpg,jpeg,png,gif" >
+                            <div ng-show="bookEdit.image.$touched && bookEdit.image.$invalid">
+                                <span class="error" ng-show="bookEdit.image.$error.required">Обязательное!</span><br>
+                                <span class="error" ng-show="bookEdit.image.$error.type">Необходимо загрузить картинку!</span><br>
+                                <span class="error" ng-show="bookEdit.image.$error.size">Размер должен быть меньше 500 Кб!</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <div class="buttons">
+                <button ng-disabled="!bookEdit.$valid" ng-if="$ctrl.editing" ng-click="$ctrl.save()">Сохранить</button>
+                <button ng-disabled="!bookEdit.$valid" ng-if="!$ctrl.editing" ng-click="$ctrl.add()">Добавить</button>
+                <button ng-click="$ctrl.cancel()">Отмена</button>
+            </div>
+        </form>
+    </div>
+
+</div>

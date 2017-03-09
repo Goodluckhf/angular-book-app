@@ -1,0 +1,38 @@
+<div style="width:100%;">
+    <div class="left">
+        <h2>Книги</h2>
+    </div>
+    <div class="right">
+        <button ng-click="$ctrl.add()">Добавить</button>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="item-container">
+    <div class="search">
+        <input ng-model="$ctrl.q" ng-change="$ctrl.searchChanged()" type="text" placeholder="Поиск">
+        <img ng-src="/images/ajax-loader.gif" ng-show="$ctrl.loading">
+    </div>
+    <div class="clear"></div>
+    <div class="left">
+        Сортировка: <a href="" ng-click="$ctrl.sortByName()">Название</a> <a href="" ng-click="$ctrl.sortByAuthor()">Автор</a>
+    </div>
+    <div class="clear"></div>
+    <hr>
+    <span ng-show="$ctrl.isError" class="error">{{$ctrl.errorMessage}}</span>
+    <div class="items">
+        <div class="item" ng-repeat="book in $ctrl.books">
+            <div class="img left">
+                <img ng-src="{{book.image}}" alt="">
+            </div>
+            <div class="description left">
+                <a href="#!book/{{book.id}}" class="title">{{book.name}}</a><br>
+                Автор: <span class="author">{{book.author}}</span><br>
+                <span ng-if="book.year">Год издания: <span class="year">{{book.year}}</span><br></span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <ul uib-pagination boundary-link-numbers="true" total-items="$ctrl.totalItems" ng-model="$ctrl.currentPage" ng-change="$ctrl.pageChanged()" items-per-page="2">
+
+        </ul>
+    </div>
+</div>

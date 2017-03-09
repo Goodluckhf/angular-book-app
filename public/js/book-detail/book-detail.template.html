@@ -1,0 +1,27 @@
+<span class="error" ng-show="$ctrl.isError">{{$ctrl.errorMessage}}</span>
+<div ng-show="!$ctrl.isError">
+    <div style="width:100%;">
+        <div class="left">
+            <h2>Книга: {{$ctrl.book.name}}</h2>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <hr>
+    <div>
+        <div class="detail-img left">
+            <img ng-src="{{$ctrl.book.image}}" alt="">
+        </div>
+        <div class="description left">
+            Автор: <span class="author">{{$ctrl.book.author}}</span><br>
+            Год издания: <span class="year">{{$ctrl.book.year}}</span><br>
+
+            <hr>
+            <p>{{$ctrl.book.description}}</p><br>
+            <div class="clear"></div>
+            <div class="buttons">
+                <button ng-click="$ctrl.edit()">Редактировать</button>
+                <button ng-click="$ctrl.remove()">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
